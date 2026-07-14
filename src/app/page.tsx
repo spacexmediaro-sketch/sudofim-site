@@ -12,8 +12,8 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero - Banner Image */}
-      <section className="relative min-h-[60vh] sm:min-h-[70vh] pt-16 sm:pt-20">
-        <Link href="/echipamente/" className="block relative w-full h-[60vh] sm:h-[70vh]">
+      <section className="relative min-h-[70vh] sm:min-h-[80vh] pt-20 sm:pt-24">
+        <Link href="/echipamente/" className="block relative w-full h-[70vh] sm:h-[80vh]">
           <Image
             src="/hero-banner.jpg"
             alt="Sudofim Serv - Utilaje, service și soluții profesionale pentru industrie - Vezi produsele"
@@ -28,8 +28,8 @@ export default async function HomePage() {
 
       {/* Trust Markers */}
       <section className="bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center text-center">
             {[
               { title: 'Garantie', desc: 'Echipamente testate', color: 'primary' },
               { title: 'Service Rapid', desc: 'Reparatii profesionale', color: 'accent' },
@@ -53,15 +53,15 @@ export default async function HomePage() {
       </section>
 
       {/* Featured Products */}
-      <section className="bg-gray-50 py-20 sm:py-28">
+      <section className="bg-gray-50 py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <span className="text-primary text-xs font-semibold uppercase tracking-[0.2em]">Catalog Echipamente</span>
             <h2 className="text-3xl sm:text-4xl font-bold text-dark mt-2">Echipamente <span className="text-primary">Disponibile</span></h2>
             <p className="text-gray-500 mt-3 max-w-xl mx-auto">Peste {products.length} echipamente profesionale de sudura, generatoare si utilaje industriale.</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
             {displayProducts.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -79,15 +79,15 @@ export default async function HomePage() {
       </section>
 
       {/* Categories */}
-      <section className="bg-white py-20 sm:py-28">
+      <section className="bg-white py-24 sm:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span className="text-primary text-xs font-semibold uppercase tracking-[0.2em]">Categorii</span>
             <h2 className="text-3xl sm:text-4xl font-bold text-dark mt-2">Echipamente pe <span className="text-primary">Categorii</span></h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {categories.filter(c => c.count > 0).map(cat => (
-              <Link key={cat.slug} href={`/echipamente/?categorie=${cat.slug}`} className="bg-gray-50 hover:bg-primary hover:text-white rounded-xl p-6 text-center transition-all group border border-gray-100 hover:border-primary">
+              <Link key={cat.slug} href={`/echipamente/?categorie=${cat.slug}`} className="bg-gray-50 hover:bg-primary hover:text-white rounded-xl p-8 text-center transition-all group border border-gray-100 hover:border-primary">
                 <h3 className="font-bold text-sm mb-1 group-hover:text-white text-dark">{cat.name}</h3>
                 <p className="text-xs text-gray-400 group-hover:text-white/70">{cat.count} produse</p>
               </Link>
@@ -103,7 +103,7 @@ export default async function HomePage() {
             <span className="text-primary text-xs font-semibold uppercase tracking-[0.2em]">Ce Oferim</span>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mt-2">Servicii <span className="text-primary">Complete</span></h2>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
             {[
               { title: 'Aparate Sudura Electrofuziune', desc: 'Vanzare si inchiriere aparate de sudura prin electrofuziune pentru conducte de polietilena. Branduri: Ritmo, Sud Line, Nupi, Georg Fischer.' },
               { title: 'Generatoare de Curent', desc: 'Generatoare de curent industriale de la marci de top: Caterpillar, Mosa. Putere de la 15kWA pana la 500kWA.' },
@@ -112,7 +112,7 @@ export default async function HomePage() {
               { title: 'Sudura MIG-TIG-MMA', desc: 'Aparate de sudura MIG, TIG, MMA si taiere cu plasma. Consumabile si accesorii pentru orice tip de sudura.' },
               { title: 'Utilaje Constructii', desc: 'Masini de maturat, carote cu stativ, echipamente de demolari, unelte de mana profesionale pentru santiere.' },
             ].map(s => (
-              <div key={s.title} className="bg-dark-light border border-white/5 rounded-xl p-8 hover:border-primary/30 transition-all card-hover">
+              <div key={s.title} className="bg-dark-light border border-white/5 rounded-xl p-10 hover:border-primary/30 transition-all card-hover">
                 <h3 className="text-white font-bold text-lg mb-3">{s.title}</h3>
                 <p className="text-white/50 text-sm leading-relaxed">{s.desc}</p>
               </div>
@@ -122,7 +122,7 @@ export default async function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="red-gradient py-20 sm:py-28">
+      <section className="red-gradient py-24 sm:py-32">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Cautati un echipament specific?</h2>
           <p className="text-white/80 text-lg mb-8">Contactati-ne pentru o oferta personalizata. Raspundem in cel mai scurt timp.</p>

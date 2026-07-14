@@ -18,12 +18,12 @@ export default function SiteHeader() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-dark/95 backdrop-blur-md border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+        <div className="flex items-center justify-between h-20 sm:h-24">
           <Link href="/" className="flex items-center">
-            <Image src="/logo-sudofim.png" alt="Sudofim Serv" width={160} height={50} className="h-10 sm:h-12 w-auto" priority />
+            <Image src="/logo-sudofim.png" alt="Sudofim Serv" width={200} height={66} className="h-12 sm:h-14 w-auto" priority />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-10">
             {navLinks.map(l => (
               <Link key={l.href} href={l.href} className="text-white/70 hover:text-white text-sm transition-colors">
                 {l.label}

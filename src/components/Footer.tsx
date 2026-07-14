@@ -5,8 +5,8 @@ import { BUSINESS } from '@/lib/constants';
 export default function Footer() {
   return (
     <footer className="bg-dark border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-3 gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid md:grid-cols-3 gap-16">
           <div>
             <div className="mb-4">
               <Image src="/logo-sudofim.png" alt={BUSINESS.companyName} width={180} height={56} className="h-12 w-auto" />

@@ -39,7 +39,7 @@ export default function ProductCard({ product }: Props) {
           </div>
         )}
       </div>
-      <div className="p-5">
+      <div className="p-6">
         <p className="text-gray-400 text-[11px] uppercase tracking-wider mb-2">{product.category.name}</p>
         <h3 className="text-dark font-semibold text-[15px] leading-snug mb-4 group-hover:text-primary transition-colors line-clamp-2" title={product.title}>
           {product.title}
