@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #BD0004;
+  --color-primary-dark: #9A0003;
+  --color-primary-light: #E8000A;
+  --color-accent: #F87A0A;
+  --color-accent-light: #FF9A3E;
+  --color-dark: #1A1A1A;
+  --color-dark-light: #2A2A2A;
+  --color-steel: #374151;
+  --font-inter: 'Inter', system-ui, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font-inter); }
+html { scroll-behavior: smooth; }
+
+.hero-gradient { background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 50%, #1A1A1A 100%); }
+.red-gradient { background: linear-gradient(135deg, #BD0004 0%, #9A0003 100%); }
+
+.card-hover { transition: all 0.3s ease; }
+.card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+
+.product-img { transition: transform 0.5s ease; }
+.product-img:hover { transform: scale(1.05); }
+
+.badge-new { background: linear-gradient(135deg, #10B981, #059669); }
+.badge-used { background: linear-gradient(135deg, #F87A0A, #EA580C); }
+
+.scroll-animate { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+.scroll-animate.visible { opacity: 1; transform: translateY(0); }
+
+.gallery-thumb { cursor: pointer; transition: border-color 0.2s; }
+
+/* Admin styles */
+.admin-sidebar { transition: width 0.3s ease; }
+.admin-card { background: white; border-radius: 0.75rem; border: 1px solid #f3f4f6; padding: 1.5rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.admin-btn { padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 500; font-size: 0.875rem; transition: all 0.2s; cursor: pointer; }
+.admin-btn-primary { padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 500; font-size: 0.875rem; transition: all 0.2s; cursor: pointer; background: #BD0004; color: white; border: none; }
+.admin-btn-primary:hover { background: #9A0003; }
+.admin-btn-outline { padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 500; font-size: 0.875rem; transition: all 0.2s; cursor: pointer; border: 1px solid #e5e7eb; color: #4b5563; background: white; }
+.admin-btn-outline:hover { background: #f9fafb; }
+
+/* Toast notifications */
+.toast { animation: slideIn 0.3s ease; }
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Stagger animations */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up { animation: fadeInUp 0.5s ease forwards; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #c0c0c0; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #a0a0a0; }
+
+/* Lead status colors */
+.lead-new { background: #dbeafe; color: #1e40af; }
+.lead-contacted { background: #fef3c7; color: #92400e; }
+.lead-qualified { background: #ede9fe; color: #5b21b6; }
+.lead-won { background: #dcfce7; color: #166534; }
+.lead-lost { background: #fee2e2; color: #991b1b; }

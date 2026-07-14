@@ -1,6 +1,9 @@
 node_modules/
+.next/
 .vercel/
+.env
+.env.local
 all_products.json
 all_products_v2.json
 products.json
-public/images/
+products_data_backup.js

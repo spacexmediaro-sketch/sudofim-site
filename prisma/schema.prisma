@@ -1,0 +1,232 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Enums ───────────────────────────────────────────────
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+}
+
+enum ProductStatus {
+  ACTIVE
+  DRAFT
+  INACTIVE
+}
+
+enum ProductCondition {
+  NOU
+  UTILIZAT
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  WON
+  LOST
+}
+
+enum LeadSource {
+  WEBSITE_FORM
+  PHONE
+  WHATSAPP
+  EMAIL
+  DIRECT
+}
+
+enum BlogCategory {
+  BLOG
+  FAQ
+  GHID
+}
+
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+}
+
+// ─── Models ──────────────────────────────────────────────
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  firstName    String
+  lastName     String
+  phone        String?
+  role         Role      @default(ADMIN)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  sessions     Session[]
+  leads        Lead[]    @relation("AssignedLeads")
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ip        String?
+  userAgent String?
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("sessions")
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  image       String?
+  sortOrder   Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id              String           @id @default(cuid())
+  title           String
+  slug            String           @unique
+  condition       ProductCondition @default(UTILIZAT)
+  categoryId      String
+  category        Category         @relation(fields: [categoryId], references: [id])
+  description     String?          @db.Text
+  images          Json             @default("[]")
+  photoCount      Int              @default(0)
+  status          ProductStatus    @default(ACTIVE)
+  featured        Boolean          @default(false)
+  tags            Json             @default("[]")
+  metaTitle       String?
+  metaDescription String?
+  sortOrder       Int              @default(0)
+  oldId           Int?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  leads           Lead[]
+
+  @@index([categoryId])
+  @@index([status])
+  @@index([condition])
+  @@index([featured])
+  @@map("products")
+}
+
+model Lead {
+  id            String     @id @default(cuid())
+  name          String
+  phone         String
+  email         String?
+  message       String?    @db.Text
+  productId     String?
+  product       Product?   @relation(fields: [productId], references: [id])
+  source        LeadSource @default(WEBSITE_FORM)
+  status        LeadStatus @default(NEW)
+  internalNotes String?    @db.Text
+  assignedToId  String?
+  assignedTo    User?      @relation("AssignedLeads", fields: [assignedToId], references: [id])
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@index([status])
+  @@index([productId])
+  @@index([createdAt])
+  @@map("leads")
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  email     String?
+  subject   String?
+  message   String   @db.Text
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([read])
+  @@index([createdAt])
+  @@map("contact_messages")
+}
+
+model Setting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+
+  @@map("settings")
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  userEmail String?
+  action    String
+  entity    String?
+  entityId  String?
+  details   Json?
+  ip        String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+model BlogPost {
+  id              String       @id @default(cuid())
+  title           String
+  slug            String       @unique
+  content         String       @db.Text
+  excerpt         String?
+  category        BlogCategory @default(BLOG)
+  status          BlogStatus   @default(DRAFT)
+  metaTitle       String?
+  metaDescription String?
+  image           String?
+  authorId        String?
+  publishedAt     DateTime?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@index([status])
+  @@index([category])
+  @@map("blog_posts")
+}
+
+model NewsletterSubscriber {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  active         Boolean   @default(true)
+  unsubscribedAt DateTime?
+  createdAt      DateTime  @default(now())
+
+  @@map("newsletter_subscribers")
+}
+
+model FAQ {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String   @db.Text
+  category  String?
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("faqs")
+}
