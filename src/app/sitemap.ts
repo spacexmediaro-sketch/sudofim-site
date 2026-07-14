@@ -20,14 +20,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BUSINESS.url}/contact/`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.8 },
   ];
 
-  const productPages = products.map(p => ({
+  const productPages = products.map((p: { slug: string; updatedAt: Date }) => ({
     url: `${BUSINESS.url}/echipamente/${p.slug}/`,
     lastModified: p.updatedAt,
     changeFrequency: 'weekly' as const,
     priority: 0.6,
   }));
 
-  const categoryPages = categories.map(c => ({
+  const categoryPages = categories.map((c: { slug: string; updatedAt: Date }) => ({
     url: `${BUSINESS.url}/echipamente/?categorie=${c.slug}`,
     lastModified: c.updatedAt,
     changeFrequency: 'weekly' as const,
