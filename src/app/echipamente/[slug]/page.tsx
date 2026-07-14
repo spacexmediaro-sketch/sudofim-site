@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getProductBySlug, getProductsByCategory, type ProductListItem } from '@/lib/products-db';
+import { getProductBySlug, getProductsByCategory } from '@/lib/products-db';
 import { BUSINESS } from '@/lib/constants';
 import ProductCard from '@/components/ProductCard';
 import LeadCaptureForm from '@/components/LeadCaptureForm';
@@ -27,7 +27,7 @@ export default async function ProductPage({ params }: Props) {
   if (!product) notFound();
 
   const related = (await getProductsByCategory(product.category.slug))
-    .filter((p: ProductListItem) => p.id !== product.id)
+    .filter(p => p.id !== product.id)
     .slice(0, 3);
 
   const productSchema = {
@@ -115,7 +115,7 @@ export default async function ProductPage({ params }: Props) {
           <div className="mt-20">
             <h2 className="text-2xl font-bold text-dark mb-8">Echipamente similare</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {related.map((p: ProductListItem) => <ProductCard key={p.id} product={p} />)}
+              {related.map(p => <ProductCard key={p.id} product={p} />)}
             </div>
           </div>
         )}

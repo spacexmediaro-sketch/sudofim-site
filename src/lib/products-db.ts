@@ -45,7 +45,7 @@ function mapProduct(p: Record<string, unknown>): ProductListItem {
 }
 
 export const getAllProducts = unstable_cache(
-  async () => {
+  async (): Promise<ProductListItem[]> => {
     const products = await prisma.product.findMany({
       where: { status: 'ACTIVE' },
       select: productSelect,
@@ -58,19 +58,19 @@ export const getAllProducts = unstable_cache(
 );
 
 export const getProductBySlug = unstable_cache(
-  async (slug: string) => {
+  async (slug: string): Promise<(ProductListItem & { tags: string[]; oldId: number | null; createdAt: Date; metaTitle: string | null; metaDescription: string | null }) | null> => {
     const p = await prisma.product.findUnique({
       where: { slug },
       select: { ...productSelect, tags: true, oldId: true, createdAt: true },
     });
-    return p ? { ...mapProduct(p as Record<string, unknown>), tags: p.tags, oldId: p.oldId, createdAt: p.createdAt, metaTitle: p.metaTitle, metaDescription: p.metaDescription } : null;
+    return p ? { ...mapProduct(p as Record<string, unknown>), tags: (p.tags as string[]) || [], oldId: p.oldId, createdAt: p.createdAt, metaTitle: p.metaTitle, metaDescription: p.metaDescription } : null;
   },
   ['product-by-slug'],
   { revalidate: 60 }
 );
 
 export const getProductsByCategory = unstable_cache(
-  async (categorySlug: string) => {
+  async (categorySlug: string): Promise<ProductListItem[]> => {
     const products = await prisma.product.findMany({
       where: { status: 'ACTIVE', category: { slug: categorySlug } },
       select: productSelect,
@@ -82,8 +82,10 @@ export const getProductsByCategory = unstable_cache(
   { revalidate: 60 }
 );
 
+export type CategoryInfo = { id: string; name: string; slug: string; description: string | null; count: number };
+
 export const getAllCategories = unstable_cache(
-  async () => {
+  async (): Promise<CategoryInfo[]> => {
     const cats = await prisma.category.findMany({
       orderBy: { sortOrder: 'asc' },
       include: { _count: { select: { products: { where: { status: 'ACTIVE' } } } } },
@@ -101,7 +103,7 @@ export const getAllCategories = unstable_cache(
 );
 
 export const getFeaturedProducts = unstable_cache(
-  async (limit = 6) => {
+  async (limit = 6): Promise<ProductListItem[]> => {
     const products = await prisma.product.findMany({
       where: { status: 'ACTIVE', featured: true },
       select: productSelect,
