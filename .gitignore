@@ -1,0 +1,6 @@
+node_modules/
+.vercel/
+all_products.json
+all_products_v2.json
+products.json
+public/images/
