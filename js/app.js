@@ -33,10 +33,10 @@ function renderProducts() {
           ${p.photoCount}
         </div>` : ''}
       </div>
-      <div class="p-4">
-        <p class="text-gray-400 text-[10px] uppercase tracking-wider mb-1">${p.category}</p>
-        <h3 class="text-dark font-semibold text-sm leading-snug mb-3 group-hover:text-primary transition-colors line-clamp-2" title="${p.title}">${p.title}</h3>
-        <div class="flex items-center justify-between">
+      <div class="p-5">
+        <p class="text-gray-400 text-[11px] uppercase tracking-wider mb-2">${p.category}</p>
+        <h3 class="text-dark font-semibold text-[15px] leading-snug mb-4 group-hover:text-primary transition-colors line-clamp-2" title="${p.title}">${p.title}</h3>
+        <div class="flex items-center justify-between pt-3 border-t border-gray-100">
           <span class="text-primary font-bold text-sm">La cerere</span>
           <span class="text-xs text-gray-400 group-hover:text-primary transition-colors flex items-center gap-1">
             Detalii
@@ -218,10 +218,10 @@ function setupSearch() {
               <span class="${p.state === 'Nou' ? 'badge-new' : 'badge-used'} text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">${p.state}</span>
             </div>
           </div>
-          <div class="p-4">
-            <p class="text-gray-400 text-[10px] uppercase tracking-wider mb-1">${p.category}</p>
-            <h3 class="text-dark font-semibold text-sm leading-snug mb-3 group-hover:text-primary transition-colors line-clamp-2">${p.title}</h3>
-            <div class="flex items-center justify-between">
+          <div class="p-5">
+            <p class="text-gray-400 text-[11px] uppercase tracking-wider mb-2">${p.category}</p>
+            <h3 class="text-dark font-semibold text-[15px] leading-snug mb-4 group-hover:text-primary transition-colors line-clamp-2">${p.title}</h3>
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100">
               <span class="text-primary font-bold text-sm">La cerere</span>
               <span class="text-xs text-gray-400 group-hover:text-primary transition-colors flex items-center gap-1">Detalii <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></span>
             </div>
